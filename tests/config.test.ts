@@ -1,6 +1,5 @@
 import { describe, it } from "../src/core/runner";
 import { expect } from "../src/core/expect";
-import { toJSONStr } from "../src/utils/to-json";
 
 const DEFAULT_ITERATION = 2;
 const DEFAULT_VALUE = 2;
@@ -16,12 +15,16 @@ interface IAbsConfig {
 }
 
 function getAbsConfig(c: IConfig): IAbsConfig {
-    if (!c.iteration) c.iteration = DEFAULT_ITERATION;
-    if (!c.value || (c.value && typeof c.value === "string"))
-        c.value = DEFAULT_VALUE;
+    const iteration = c.iteration ?? DEFAULT_ITERATION;
 
-    console.log("before returning: ", toJSONStr(c));
-    return c as IAbsConfig;
+    let value: number;
+    if (typeof c.value === "number") {
+        value = c.value;
+    } else {
+        value = DEFAULT_VALUE;
+    }
+
+    return { iteration, value };
 }
 
 describe("Config operation", () => {

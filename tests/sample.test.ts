@@ -1,5 +1,5 @@
 import { describe, it } from "../src/core/runner";
-import { beforeEach } from "../src/core/hooks";
+import { afterEach, beforeEach } from "../src/core/hooks";
 import { expect } from "../src/core/expect";
 
 describe("array operations", () => {
@@ -7,6 +7,10 @@ describe("array operations", () => {
 
     beforeEach(() => {
         numbers = [];
+    });
+
+    afterEach(() => {
+        console.log("Test finished");
     });
 
     it("should add items", () => {
@@ -24,6 +28,14 @@ describe("array operations", () => {
     it("should return the first item as 0", () => {
         numbers = [1];
 
-        expect(numbers[0]).toEqual(0);
+        expect(numbers[0]).toEqual(1);
     });
+
+    it("should return the last item as 10", () => {
+        numbers = [10];
+
+        expect(numbers[numbers.length - 1]).toEqual(10);
+    });
+
+    it("", () => {});
 });

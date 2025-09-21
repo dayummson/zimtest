@@ -1,4 +1,5 @@
 import type { IExpect } from "../types";
+import { assert } from "../utils/assert";
 import { toJSONStr } from "../utils/to-json";
 
 export function expect<T>(value: T): IExpect<T> {
@@ -31,6 +32,12 @@ export function expect<T>(value: T): IExpect<T> {
             if (value) {
                 throw `❌ Expected ${value} to be falsy, but got truthy value.`;
             }
+
+            console.log("✅ Values matched");
+        },
+
+        toThrow(message) {
+            assert(!value, message ?? "Error");
 
             console.log("✅ Values matched");
         },
